@@ -225,8 +225,7 @@ namespace TurnoApp
 
 
                 Console.WriteLine("\nRegistro agregado exitosamente.\n");
-                Console.WriteLine("\nPresiona Enter para continuar...");
-
+               
                 Console.ReadLine();
             }
             else
@@ -329,7 +328,7 @@ namespace TurnoApp
             doc.Close();
 
             Console.WriteLine("Reporte PDF generado exitosamente.");
-            Console.WriteLine("Presiona Enter para continuar...");
+            
             Console.ReadLine();
         }
 
