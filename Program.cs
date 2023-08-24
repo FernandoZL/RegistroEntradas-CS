@@ -178,7 +178,24 @@ namespace TurnoApp
 
                 AgregarRegistroAGoogleSheets(nuevoRegistro, spreadsheetId, range);
                 AgregarRegistroAExcel(nuevoRegistro, "Registros.xlsx");
+
+
+                Console.WriteLine("Datos Ingresados:");
+                Console.WriteLine($"{"No. Licencia:",-25} {nuevoRegistro.NoLicencia}");
+                Console.WriteLine($"{"Nombre y Apellido:",-25} {nuevoRegistro.NombreApellido}");
+                Console.WriteLine($"{"Placas de la Unidad:",-25} {nuevoRegistro.Placas}");
+                Console.WriteLine($"{"Empresa:",-25} {nuevoRegistro.Empresa}");
+                Console.WriteLine($"{"Fecha y Hora de Ingreso:",-25} {nuevoRegistro.FechaHoraIngreso}");
+                Console.WriteLine($"{"No. Turno:",-25} {nuevoRegistro.Turno}");
+
+               
+
+
+
                 Console.WriteLine("Registro agregado exitosamente.");
+                Console.WriteLine("Presiona Enter para continuar...");
+
+                Console.ReadLine();
             }
             else
             {
