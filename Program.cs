@@ -60,55 +60,77 @@ namespace TurnoApp
 
             numeroTurno = CargarNumeroTurno("numeroTurno.txt"); // Cargar el valor del contador desde el archivo
 
-           
+            bool mostrarMenu = true; // Variable para controlar si se muestra el menú principal
+
 
 
             while (true)
             {
-                string opcion = MostrarMenu();
 
-                switch (opcion)
+                if (mostrarMenu)
                 {
-                    case "1":
-                        IngresarNuevoRegistro(registros, spreadsheetId, range, ref numeroTurno);
-                        break;
+                    string opcion = MostrarMenu();
+
+                    switch (opcion)
+                    {
+                        case "1":
+                            IngresarNuevoRegistro(registros, spreadsheetId, range, ref numeroTurno);
+                            mostrarMenu = false; // Ocultar el menú después de ingresar un nuevo registro
+
+                            break;
 
 
-                    case "2":
-                        VerRegistros(registros);
-                        break;
+                        case "2":
+                            VerRegistros(registros);
+                            Console.WriteLine("Presiona Enter para continuar...");
+                            Console.ReadLine();
+                            mostrarMenu = false; // Ocultar el menú después de ver registros
 
-                    case "3":
-                        return;
-                    
-                    
-                    case "4":
-                        GenerarReporte(registros, "Registros.xlsx");
-                        break;
 
-                    
+                            break;
 
-                     
+                        case "3":
+                            return;
 
-                    default:
-                        Console.WriteLine("Opción inválida. Intente nuevamente.");
-                        break;
+
+                        case "4":
+                            GenerarReporte(registros, "Registros.xlsx");
+                            break;
+
+
+
+
+
+                        default:
+                            Console.WriteLine("Opción inválida. Intente nuevamente.");
+                            break;
+                    }
+                }
+                else
+                {
+                    mostrarMenu = true; // Restablecer el valor para mostrar el menú en el siguiente ciclo
+                }
                 }
             }
-        }
 
-
+        
         static string MostrarMenu()
         {
             Console.Clear();
-            Console.WriteLine("\n=== Menu ===");
-            Console.WriteLine("1. Ingresar nuevo registro");
-            Console.WriteLine("2. Ver registros");
-            Console.WriteLine("3. Salir");
-        
+            Console.Clear(); // Limpiar la pantalla antes de mostrar el formulario de ingreso
 
+
+            Console.WriteLine(new string('=', 25));
+            Console.WriteLine("\n=== Registro de Unidades  ===\n");
+            
+            Console.WriteLine("   1. Ingresar nuevo registro");
+            Console.WriteLine("   2. Ver registros");
+            Console.WriteLine("   3. Salir");
+            Console.WriteLine(new string('=', 25));
+            Console.WriteLine("\n");
             Console.Write("Selecciona una opción: ");
             return Console.ReadLine();
+
         }
 
         static List<Registro> CargarRegistrosDesdeExcel(string excelFilePath, out int numeroTurno)
@@ -153,7 +175,15 @@ namespace TurnoApp
 
         static void IngresarNuevoRegistro(List<Registro> registros, string spreadsheetId, string range, ref int numeroTurno)
         {
-            Console.Write("No. Licencia: ");
+            Console.Clear(); // Limpiar la pantalla antes de mostrar el formulario de ingreso
+            Console.WriteLine("\n=== Formulario de registro ===\n");
+            Console.WriteLine(new string('=', 45));
+            Console.WriteLine("Por favor ingresa los siguientes datos:");
+            Console.WriteLine(new string('=', 45));
+
+            Console.WriteLine("\n");
+
+           Console.Write("No. Licencia: ");
             string noLicencia = Console.ReadLine();
 
             Console.Write("Nombre y Apellido: ");
@@ -179,8 +209,10 @@ namespace TurnoApp
                 AgregarRegistroAGoogleSheets(nuevoRegistro, spreadsheetId, range);
                 AgregarRegistroAExcel(nuevoRegistro, "Registros.xlsx");
 
+                Console.Clear(); // Limpiar la pantalla antes de mostrar el formulario de ingreso
 
-                Console.WriteLine("Datos Ingresados:");
+                Console.WriteLine("\n=== Datos Ingresados ===");
+                Console.WriteLine("-------------------------:");
                 Console.WriteLine($"{"No. Licencia:",-25} {nuevoRegistro.NoLicencia}");
                 Console.WriteLine($"{"Nombre y Apellido:",-25} {nuevoRegistro.NombreApellido}");
                 Console.WriteLine($"{"Placas de la Unidad:",-25} {nuevoRegistro.Placas}");
@@ -192,14 +224,14 @@ namespace TurnoApp
 
 
 
-                Console.WriteLine("Registro agregado exitosamente.");
-                Console.WriteLine("Presiona Enter para continuar...");
+                Console.WriteLine("\nRegistro agregado exitosamente.\n");
+                Console.WriteLine("\nPresiona Enter para continuar...");
 
                 Console.ReadLine();
             }
             else
             {
-                Console.WriteLine("El registro ya existe. No se agregó duplicado.");
+                Console.WriteLine("\nEl registro ya existe. No se agregó duplicado.");
             }
         }
 
@@ -227,17 +259,21 @@ namespace TurnoApp
 
         static void VerRegistros(List<Registro> registros)
         {
-            Console.WriteLine("Registros:");
-            Console.WriteLine(new string('-', 105));
+            Console.Clear(); // Limpiar la pantalla antes de mostrar el formulario de ingreso
+
+            Console.WriteLine("\n=== Registros ===\n");
+
+            Console.WriteLine("\n");
+            Console.WriteLine(new string('=', 120));
             Console.WriteLine($"| {"No. Licencia",-12} | {"Nombre y Apellido",-20} | {"Placas de la Unidad",-15} | {"Empresa",-12} | {"Fecha y Hora de Ingreso",-25} | {"No. Turno",-12} |");
-            Console.WriteLine(new string('-', 105));
+            Console.WriteLine(new string('-', 120));
 
             foreach (var registro in registros)
             {
                 Console.WriteLine($"| {registro.NoLicencia,-12} | {registro.NombreApellido,-20} | {registro.Placas,-15} | {registro.Empresa,-12} | {registro.FechaHoraIngreso.ToString("dd/MM/yyyy hh:mm tt"),-25} | {FormatearNumeroIngreso(registro.Turno),-12} |");
             }
 
-            Console.WriteLine(new string('-', 105)); // Mostrar línea horizontal al final
+            Console.WriteLine(new string('=', 120)); // Mostrar línea horizontal al final
 
             Console.WriteLine("Presiona Enter para continuar...");
             Console.ReadLine();
