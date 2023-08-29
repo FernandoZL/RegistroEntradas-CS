@@ -274,8 +274,8 @@ namespace TurnoApp
 
             Console.WriteLine(new string('=', 120)); // Mostrar línea horizontal al final
 
-            Console.WriteLine("Presiona Enter para continuar...");
-            Console.ReadLine();
+            // Console.WriteLine("Presiona Enter para continuar...");
+            // Console.ReadLine();
         }
         static void GenerarReporte(List<Registro> registros, string excelFilePath)
         {
