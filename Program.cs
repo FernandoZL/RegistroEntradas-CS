@@ -201,7 +201,7 @@ namespace TurnoApp
             Console.Write("Placas de la Unidad: ");
             string placas = Console.ReadLine();
 
-            Console.Write("Empresa: ");
+            Console.Write("Proveedor: ");
             string empresa = Console.ReadLine();
 
             DateTime fechaHoraIngreso = DateTime.Now;
@@ -247,7 +247,7 @@ namespace TurnoApp
                 Console.WriteLine($"{"No. Licencia:",-25} {nuevoRegistro.NoLicencia}");
                 Console.WriteLine($"{"Nombre y Apellido:",-25} {nuevoRegistro.NombreApellido}");
                 Console.WriteLine($"{"Placas de la Unidad:",-25} {nuevoRegistro.Placas}");
-                Console.WriteLine($"{"Empresa:",-25} {nuevoRegistro.Empresa}");
+                Console.WriteLine($"{"Proveedor:",-25} {nuevoRegistro.Empresa}");
                 Console.WriteLine($"{"Fecha y Hora de Ingreso:",-25} {nuevoRegistro.FechaHoraIngreso}");
 
                 Console.WriteLine($"{" ----------------",-25} {FormatearNumeroRegistro(numeroRegistro)}");
@@ -339,7 +339,7 @@ namespace TurnoApp
 
             Console.WriteLine("\n");
             Console.WriteLine(new string('=', 130));
-            Console.WriteLine($"| {"No. Registro",-12} | {"No. Licencia",-12} | {"Nombre y Apellido",-20} | {"Placas de la Unidad",-15} | {"Empresa",-12} | {"Fecha y Hora de Ingreso",-25} | {"No. Turno",-12}");
+            Console.WriteLine($"| {"No. Registro",-12} | {"No. Licencia",-12} | {"Nombre y Apellido",-20} | {"Placas de la Unidad",-15} | {"Proveedor",-12} | {"Fecha y Hora de Ingreso",-25} | {"No. Turno",-12}");
             Console.WriteLine(new string('-', 130));
 
             foreach (var registro in registros)
@@ -398,7 +398,7 @@ namespace TurnoApp
             tabla.AddCell("No. Licencia");
             tabla.AddCell("Nombre y Apellido");
             tabla.AddCell("Placas de la Unidad");
-            tabla.AddCell("Empresa");
+            tabla.AddCell("Proveedor");
             tabla.AddCell("Fecha y Hora de Ingreso");
             tabla.AddCell("No. Turno");
 
